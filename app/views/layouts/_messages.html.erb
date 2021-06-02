@@ -1,7 +1,14 @@
-<ul>
-    <% flash.each do |name,msg|%>
-        <li>
-            <%=msg%>
-        </li>   
-    <%end%>
-</ul>
+<div class="container">  
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <% flash.each do |name,msg|%>
+        <div class='alert alert-<%="#{name}"%> alert-dismissible fade show'>
+          <%=content_tag :div,msg,id: "flash_#{name}" if name.is_a?(String)%>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
