@@ -1,4 +1,4 @@
 class Article < ApplicationRecord
-    validates :title,presence: true,length: {minimum: 10,maximum: 50}
+    validates :title,presence: true,length: {minimum: 10,maximum: 300}
     validates :description,presence: true,length: {minimum: 10,maximum: 900}
 end
