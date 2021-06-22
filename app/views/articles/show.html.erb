@@ -1,3 +1,17 @@
+<p class= "text-center">Created By:</p>
+<div class="card mb-3 mx-auto" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <%=link_to(gravatar_for(@article.user,size:30,classes: "card-img-top"),user_path(@article.user))%>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title text-center"><%=link_to(@article.user.username,user_path(@article.user))%></h5>
+        <p class="card-text text-center"><%=pluralize(@article.user.articles.count,"article")%></p>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="card bg-info text-white mb-3">
   <div class="card-header">
     <h3 class="text-center"><%=@article.title%></h3>

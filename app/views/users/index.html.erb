@@ -1,0 +1,15 @@
+<%@users.each do |user|%>
+  <div class="card mb-3 mx-auto" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <%=link_to(gravatar_for(user,size:30,classes: "card-img-top"),user_path(user))%>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title text-center"><%=link_to(user.username,user_path(user))%></h5>
+          <p class="card-text text-center"><%=pluralize(user.articles.count,"article")%></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>
