@@ -15,16 +15,28 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+<<<<<<< HEAD
     
   end
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "User is updated"
+=======
+
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.save
+      flash[:success] = "Your edit is on"
+>>>>>>> 3a65a2caa78167627b22f3ab7fd2920043a7921f
       redirect_to articles_path
     else
       render 'edit'
     end
+<<<<<<< HEAD
   end
 
   def show
@@ -34,6 +46,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page],per_page: 3)
+=======
+
+>>>>>>> 3a65a2caa78167627b22f3ab7fd2920043a7921f
   end
 
   private
