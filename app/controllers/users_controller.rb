@@ -15,28 +15,16 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-
     
   end
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = "User is updated"
-
-
-  end
-
-  def update
-    @user = User.find(params[:id])
-
-    if @user.save
-      flash[:success] = "Your edit is on"
-
       redirect_to articles_path
     else
       render 'edit'
     end
-
   end
 
   def show
@@ -46,7 +34,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page],per_page: 3)
-
   end
 
   private
@@ -54,5 +41,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username,:email,:password)
   end
-  
 end
