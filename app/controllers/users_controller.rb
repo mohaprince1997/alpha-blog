@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
-  before_action :find_user , only: [:show,:edit,:update]
+  before_action :find_user, only: [:show, :edit, :update]
+  before_action :require_login, only: [:edit, :update]
+  before_action :require_same_user, only: [:edit, :update]
 
   def new
-    @user = User.new()
+    @user = User.new
   end
 
   def create
@@ -15,7 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
+  def edit 
   end
 
   def update
@@ -27,8 +29,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def show 
-    
+  def show
     @user_articles = @user.articles.paginate(page: params[:page],per_page: 5)
   end
 
@@ -41,7 +42,16 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username,:email,:password)
   end
+
   def find_user
     @user = User.find(params[:id])
   end
+
+  def require_same_user
+    if current_user != @user
+      flash[:danger] = "You must be the user to do this job"
+      redirect_to root_path
+    end
+  end
+
 end
