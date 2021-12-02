@@ -20,5 +20,9 @@ class SessionsController < ApplicationController
     flash[:success] = "You have succssefully logout"
     redirect_to root_path
   end
+  
+  def index
+    @ips = RequestsIp.all
+  end
 
 end
