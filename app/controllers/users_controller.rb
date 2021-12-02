@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update]
   before_action :require_login, only: [:edit, :update]
   before_action :require_same_user, only: [:edit, :update]
+  before_action :require_admin_user , only: [:destroy]
 
   def new
     @user = User.new
@@ -37,6 +38,11 @@ class UsersController < ApplicationController
   def index
     @users = User.paginate(page: params[:page],per_page: 3)
   end
+  def destroy
+    @user = find_user()
+    
+    
+  end
 
   private
 
@@ -51,6 +57,12 @@ class UsersController < ApplicationController
   def require_same_user
     if current_user != @user
       flash[:danger] = "You must be the user to do this job"
+      redirect_to root_path
+    end
+  end
+  def require_admin_user
+    if logged_in? && !current_user.admin?
+      flash[:danger] = 'You must be admin to perform this kind of action'
       redirect_to root_path
     end
   end

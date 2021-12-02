@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user_path(user)
 
     else
-      flash.now[:danger] = 'Sonthing is wronge with you or your informations'
+      flash.now[:danger] = 'Somthing is wronge with you or your informations'
       render 'new'
     end
   end

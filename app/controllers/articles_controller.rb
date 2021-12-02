@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :find_article, only: [:show,:edit,:update,:destroy]
-  before_action :require_login, except: [:index,:show]
-  before_action :require_same_user, only: [:edit,:update,:destroy]
+  before_action :find_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def new
     @article = Article.new
@@ -12,17 +12,15 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
     @article.user = current_user
     if @article.save
-      flash[:success] = "Article was successfully added in the database"
+      flash[:success] = 'Article was successfully added in the database'
       redirect_to article_path(@article)
     else
-      #redirect_to new_article_path
-      render "new"
+      # redirect_to new_article_path
+      render 'new'
     end
   end
 
-
   def show
-
   end
 
   def edit
@@ -48,16 +46,19 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def find_article
-      @article = Article.find(params[:id])
+
+  def find_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:title,:description)
+  end
+
+  def require_same_user
+    if current_user != @article.user && !current_user.admin?
+      flash[:danger] = 'You are not the chosen to do this job'
+      redirect_to root_path
     end
-    def article_params
-      params.require(:article).permit(:title,:description)
-    end
-    def require_same_user
-      if current_user != @article.user
-        flash[:danger] = "You are not the chosen to do this job"
-        redirect_to root_path
-      end
-    end
+  end
 end

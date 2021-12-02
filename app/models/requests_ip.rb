@@ -1,0 +1,5 @@
+class RequestsIp < ApplicationRecord
+
+
+
+end
