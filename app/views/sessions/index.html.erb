@@ -1,5 +1,7 @@
 <%@ips.each do |ip|%>
   <div class="card mb-3 mx-auto" style="max-width: 540px;">
-    <%=ip.request_ipver4%>
+  
+    <p> <%=ip.request_ipver4%>----------<%=ip.id%>----------<%=ip.created_at%> </p>
+     <%=link_to "Delete",ip_path(ip),method: :delete,data: {confirm: "Are you sure?"} ,class: "btn btn-outline-danger"%>
   </div>
 <%end%>
